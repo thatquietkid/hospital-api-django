@@ -1,5 +1,3 @@
-version: '3.9'
-
 services:
   web:
     build: .
@@ -7,19 +5,4 @@ services:
       - "8000:8000"
     volumes:
       - .:/app
-    env_file:
-      - .env
-    depends_on:
-      - db
-
-  db:
-    image: postgres:14
-    environment:
-      POSTGRES_DB: hospitaldb
-      POSTGRES_USER: hospitaluser
-      POSTGRES_PASSWORD: hospitalpass
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-
-volumes:
-  postgres_data:
+      - ./db.sqlite3:/app/db.sqlite3
