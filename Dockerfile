@@ -24,4 +24,4 @@ COPY . .
 EXPOSE 8000
 
 # Run migrations and start server
-CMD ["sh", "-c", "python manage.py migrate && gunicorn hospital_api.wsgi:application --bind 0.0.0.0:8000"]
+CMD ["sh", "-c", "python manage.py migrate && python manage.py collectstatic --noinput && gunicorn hospital_api.wsgi:application --bind 0.0.0.0:8000"]

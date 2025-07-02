@@ -6,15 +6,18 @@ from .models import Patient, MedicalRecord
 from .serializers import UserSerializer, PatientSerializer, MedicalRecordSerializer
 from rest_framework.views import APIView
 from rest_framework_simplejwt.views import TokenObtainPairView
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 
-@api_view(['GET'])
+@api_view(["GET"])
+@permission_classes([AllowAny])
 def health_check(request):
-    return Response({"status": "ok"}, status=status.HTTP_200_OK)
+    return Response({"status": "ok"})
 
-@api_view(['GET'])
-def welcome_view(request):
-    return Response({"message": "Welcome to the Hospital Management API 👩‍⚕️"}, status=status.HTTP_200_OK)
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def welcome(request):
+    return Response({"message": "Welcome to the Hospital API!"})
 
 
 class SignupView(generics.CreateAPIView):
